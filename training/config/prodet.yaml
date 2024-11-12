@@ -1,0 +1,188 @@
+# log dir 
+log_dir: logs/evaluations/xception_best
+
+#LMDB dir
+lmdb_dir: 'I:\transform_2_lmdb'
+
+# model setting
+pretrained: ./training/pretrained/efficientnet-b4-6ed6700e.pth #./training/pretrained/xception-b5690688.pth   # path to a pre-trained model, if using one
+model_name: prodet   # model name
+backbone_name: efficientnetb4  # backbone name
+restore_ckpt: 'None'
+#backbone setting
+backbone_config:
+  mode: original
+  num_classes: 2
+  inc: 3
+  dropout: false
+
+# dataset
+all_dataset: [FaceForensics++, FF-F2F, FF-DF, FF-FS, FF-NT, FaceShifter, DeepFakeDetection, Celeb-DF-v1, Celeb-DF-v2, DFDCP, DFDC, DeeperForensics-1.0, UADFV]
+train_dataset: [FaceForensics++]
+test_dataset: [FaceForensics++, FF-F2F, FF-DF, FF-FS, FF-NT]
+dataset_json_folder: 'preprocessing/dataset_json'
+dataset_type: sbiplus_v2
+compression: c23  # compression-level for videos
+train_batchSize: 24  # training batch size
+test_batchSize: 32   # test batch size
+workers: 8   # number of data loading workers
+frame_num: {'train': 8, 'test': 32}   # number of frames to use per video in training and testing
+resolution: 256   # resolution of output image to network
+with_mask: false   # whether to include mask information in the input
+with_landmark: false   # whether to include facial landmark information in the input
+# use_phase_spe: None
+# label settings
+label_dict:
+  #inswap
+  inswap_Real: 0
+  inswap_Fake: 1
+  #fsgan
+  fsgan_Real: 0
+  fsgan_Fake: 1
+  #facedancer
+  facedancer_Real: 0
+  facedancer_Fake: 1
+  #mobileswap
+  mobileswap_Real: 0
+  mobileswap_Fake: 1
+  #deepfacelab
+  deepfacelab_Real: 0
+  deepfacelab_Fake: 1
+  #uniface
+  uniface_Real: 0
+  uniface_Fake: 1
+  #E4S
+  e4s_Real: 0
+  e4s_Fake: 1
+  #blendface
+  blendface_Real: 0
+  blendface_Fake: 1
+  #simswap
+  simswap_Real: 0
+  simswap_Fake: 1
+  # DFD
+  DFD_fake: 1
+  DFD_real: 0
+  # FF++ + FaceShifter(FF-real+FF-FH)
+  FF-SH: 1
+  FF-F2F: 1
+  FF-DF: 1
+  FF-FS: 1
+  FF-NT: 1
+  FF-FH: 1
+  FF-real: 0
+  # CelebDF
+  CelebDFv1_real: 0
+  CelebDFv1_fake: 1
+  CelebDFv2_real: 0
+  CelebDFv2_fake: 1
+  # DFDCP
+  DFDCP_Real: 0
+  DFDCP_FakeA: 1
+  DFDCP_FakeB: 1
+  # DFDC
+  DFDC_Fake: 1
+  DFDC_Real: 0
+  # DeeperForensics-1.0
+  DF_fake: 1
+  DF_real: 0
+  # UADFV
+  UADFV_Fake: 1
+  UADFV_Real: 0
+
+
+
+# data augmentation
+use_data_augmentation: true  # Add this flag to enable/disable data augmentation
+data_aug:
+  flip_prob: 0.5
+  rotate_prob: 0
+  rotate_limit: [-10, 10]
+  blur_prob: 0.5
+  blur_limit: [3, 7]
+  brightness_prob: 0.5
+  brightness_limit: [-0.1, 0.1]
+  contrast_limit: [-0.1, 0.1]
+  quality_lower: 40
+  quality_upper: 100
+  remove_attribute: false
+  gridmask_prob: 0
+  remove_nose_prob: 0.0
+  remove_eyes_prob: 0.0
+
+
+# mean and std for normalization
+mean: [0.5, 0.5, 0.5]
+std: [0.5, 0.5, 0.5]
+
+# optimizer config
+optimizer:
+  # choose between 'adam' and 'sgd'
+  type: adam
+  adam:
+    lr: 0.0002  # learning rate
+    beta1: 0.9  # beta1 for Adam optimizer
+    beta2: 0.999 # beta2 for Adam optimizer
+    eps: 0.00000001  # epsilon for Adam optimizer
+    weight_decay: 0.0005  # weight decay for regularization
+    amsgrad: false
+  sgd:
+    lr: 0.0002  # learning rate
+    momentum: 0.9  # momentum for SGD optimizer
+    weight_decay: 0.0005  # weight decay for regularization
+  sam:
+    lr: 0.001  # learning rate
+    momentum: 0.9  # momentum for SGD optimizer
+
+# training config
+lr_scheduler: None   # learning rate scheduler step
+lr_step: 3
+lr_gamma: 0.4   # learning rate scheduler
+nEpochs: 20   # number of epochs to train for
+start_epoch: 0   # manual epoch number (useful for restarts)
+save_epoch: 1   # interval epochs for saving models
+rec_iter: 100   # interval iterations for recording
+logdir: ./logs   # folder to output images and logs
+manualSeed: 1024   # manual seed for random number generation
+save_ckpt: true   # whether to save checkpoint
+save_feat: true   # whether to save features
+
+losstype: null
+
+# metric
+metric_scoring: auc   # metric for evaluation (auc, acc, eer, ap)
+
+# cuda
+ngpu: 1   # number of GPUs to use
+cuda: true   # whether to use CUDA acceleration
+cudnn: true   # whether to use CuDNN for convolution operations
+
+#sbi+deepfake
+comb_fake:
+  bi: true
+
+  bifake_ratio: 1
+  blendfake_ratio: 1
+  deepfake_ratio: 1
+  order: sequence # random or sequence
+  bifake_label: 3
+  blendfake_label: 1
+  deepfake_label: 2
+
+
+  blend_spe_loc: null
+  blend_loc: whole_face # defalut: whole_face
+  blend_loc_option: [whole_face,attribute,all,whole_att,trick_whole_face]
+  cat_manner: linear # max, linear, re-class
+
+# loss function
+loss_func: soft_cross_entropy   # loss function to use cross_entropy
+
+feature_operation: true #feaOp
+feature_adjust: true  #feaAdj keeping it true
+Op_start: 0
+linear_init: false
+feature_drift: true # keep conv? norm?
+real_choice: 8 # default 4
+soft_bi: true # default false
+bi_topN: 3 # default 3 [1,3,-1]
