@@ -15,9 +15,8 @@ import torch.optim as optim
 from torch.nn import DataParallel
 from torch.utils.tensorboard import SummaryWriter
 
-from dataset.sbiplus_dataset import SBIPlusDataset
 from dataset.sbiplus_dataset_v2 import SBIPlusV2Dataset
-from detectors.utils.sbiplus_api import feature_operation, feature_operation_v2
+from detectors.utils.prodet_api import feature_operation, feature_operation_v2
 from metrics.base_metrics_class import calculate_metrics_for_train
 
 from detectors.base_detector import AbstractDetector
