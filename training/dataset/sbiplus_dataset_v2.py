@@ -12,7 +12,7 @@ from copy import deepcopy
 import albumentations as A
 from training.dataset.albu import IsotropicResize
 from training.dataset.abstract_dataset import DeepfakeAbstractBaseDataset
-from training.dataset.sbi_api_yzy import SBI_API
+from training.dataset.sbi_api import SBI_API
 import albumentations as alb
 from skimage.metrics import structural_similarity as ssim
 import numpy as np
