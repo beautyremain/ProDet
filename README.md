@@ -1,5 +1,5 @@
 # ProDet
-The official code for paper "Can We Leave Deepfake Data Behind in Training Deepfake Detector" (NIPS2024 poster)
+The official code for paper "[Can We Leave Deepfake Data Behind in Training Deepfake Detector](https://arxiv.org/pdf/2408.17052)" (NIPS2024 poster)
 
 ![main_archi.pdf](./main_archi.png)
 
@@ -16,4 +16,15 @@ ProDet is implemented within the framework of [DeepfakeBench](https://github.com
 
 
 
+
 Completely organized code and instructions will be made available soon. 
+
+You may cite our paper by:  
+```bibtex
+@article{cheng2024can,
+  title={Can We Leave Deepfake Data Behind in Training Deepfake Detector?},
+  author={Cheng, Jikang and Yan, Zhiyuan and Zhang, Ying and Luo, Yuhao and Wang, Zhongyuan and Li, Chen},
+  journal={arXiv preprint arXiv:2408.17052},
+  year={2024}
+}
+
