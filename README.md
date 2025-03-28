@@ -7,7 +7,8 @@ ProDet is implemented within the framework of [DeepfakeBench](https://github.com
 
 You may find the overall-best checkpoint of our method from [Google Drive](https://drive.google.com/drive/folders/16IDcKVqziJ-Qv_IfZOAcYGwdeZAM-x5s?usp=drive_link), which is recommended for the comparing experiments in your own research. 
 
-####-------- UPDATE INFERENCE DEMO--------
+-------- UPDATE INFERENCE DEMO --------
+
 To facilitate researchers in rapidly evaluating our detection results, we provide **Demo Code** that supports direct inference, as shown below:
 ```shell script
 python ./demo/prodet_inference.py
@@ -29,7 +30,7 @@ if __name__ == '__main__':
 ```
 Alternatively, you may also directly integrate and utilize `ProDet_infer` within your own codebase for evaluation purposes.
 
-####-------------------------------------------------------------------------------
+-------- End Update --------
 
 There is no additional package required beyond DeepfakeBench and this repository, hence you should easily reproduce the training of our paper with an established DeepfakeBench environment as:
 
